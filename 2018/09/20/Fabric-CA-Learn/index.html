@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="DailyLearn">
 <meta property="og:description" content="Fabric-CA按照Fabric-CA安装测试Fabric-CA各项接口，理解Fabric-CA功能。 接口Fabric-CA提供了Swagger格式的json文档。通过对不同接口的测试，再结合源码的阅读提高对Fabric-CA的理解。 测试发现的问题 hf.Registrar.DelegateRoles属性不生效DelegateRoles属性按照官方文档和查阅的资料来看，意思是用来控制用户在注">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-20T03:17:41.910Z">
+<meta property="og:updated_time" content="2018-09-20T03:20:14.446Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Fabric-CA Learn">
 <meta name="twitter:description" content="Fabric-CA按照Fabric-CA安装测试Fabric-CA各项接口，理解Fabric-CA功能。 接口Fabric-CA提供了Swagger格式的json文档。通过对不同接口的测试，再结合源码的阅读提高对Fabric-CA的理解。 测试发现的问题 hf.Registrar.DelegateRoles属性不生效DelegateRoles属性按照官方文档和查阅的资料来看，意思是用来控制用户在注">
@@ -175,10 +175,8 @@
         <h1 id="Fabric-CA"><a href="#Fabric-CA" class="headerlink" title="Fabric-CA"></a>Fabric-CA</h1><p>按照<a href="https://hyperledger-fabric-ca.readthedocs.io/en/latest/" target="_blank" rel="noopener">Fabric-CA</a>安装测试Fabric-CA各项接口，理解Fabric-CA功能。</p>
 <h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><p>Fabric-CA提供了Swagger格式的json<a href="https://raw.githubusercontent.com/hyperledger/fabric-ca/master/swagger/swagger-fabric-ca.json" target="_blank" rel="noopener">文档</a>。通过对不同接口的测试，再结合<a href="https://github.com/hyperledger/fabric-ca" target="_blank" rel="noopener">源码</a>的阅读提高对Fabric-CA的理解。</p>
 <h2 id="测试发现的问题"><a href="#测试发现的问题" class="headerlink" title="测试发现的问题"></a>测试发现的问题</h2><ul>
-<li>hf.Registrar.DelegateRoles属性不生效<br>DelegateRoles属性按照官方文档和查阅的资料来看，意思是用来控制用户在注册新用户的hf.Registrar.Roles的范围的。即用户A的属性为{Roles=client，user，peer DelegateRoles=client，user Attributes=*}，则A在注册新用户B时，B的Roles属性范围只能小于等于{client，user}。但测试时此属性不生效。查看源码发现对DelegateRoles属性的检测逻辑只检测是否小于等于Roles属性。<ul>
+<li>hf.Registrar.DelegateRoles属性不生效<br>DelegateRoles属性按照官方文档和查阅的资料来看，意思是用来控制用户在注册新用户的hf.Registrar.Roles的范围的。即用户A的属性为{Roles=client，user，peer DelegateRoles=client，user Attributes=*}，则A在注册新用户B时，B的Roles属性范围只能小于等于{client，user}。但测试时此属性不生效。查看源码发现对DelegateRoles属性的检测逻辑只检测是否小于等于Roles属性。</li>
 <li>Affiliation修改，会同样修改相关用户hf.Affiliation属性。但是属性修改后会使hf.Affiliation的cert属性变为false。源码阅读发现在修改属性时，未修改ecert，导致ecert使用默认值false。</li>
-</ul>
-</li>
 </ul>
 
       
@@ -253,8 +251,8 @@
 <nav id="article-nav">
   
   
-    <a href="/2018/09/09/fabric架构/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">fabric架构</div>
+    <a href="/2018/09/06/hexo-mark/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">hexo mark</div>
       <i class="icon-circle-right"></i>
     </a>
   
