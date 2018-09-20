@@ -6,15 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | DailyLearn</title>
+  <title>Fabric-CA Learn | DailyLearn</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="DailyLearn">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="Fabric-CA按照Fabric-CA安装测试Fabric-CA各项接口，理解Fabric-CA功能。 接口Fabric-CA提供了Swagger格式的json文档。通过对不同接口的测试，再结合源码的阅读提高对Fabric-CA的理解。 测试发现的问题 hf.Registrar.DelegateRoles属性不生效DelegateRoles属性按照官方文档和查阅的资料来看，意思是用来控制用户在注">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fabric-CA Learn">
+<meta property="og:url" content="http://yoursite.com/2018/09/20/Fabric-CA-Learn/index.html">
 <meta property="og:site_name" content="DailyLearn">
+<meta property="og:description" content="Fabric-CA按照Fabric-CA安装测试Fabric-CA各项接口，理解Fabric-CA功能。 接口Fabric-CA提供了Swagger格式的json文档。通过对不同接口的测试，再结合源码的阅读提高对Fabric-CA的理解。 测试发现的问题 hf.Registrar.DelegateRoles属性不生效DelegateRoles属性按照官方文档和查阅的资料来看，意思是用来控制用户在注">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-09-20T03:17:41.910Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DailyLearn">
+<meta name="twitter:title" content="Fabric-CA Learn">
+<meta name="twitter:description" content="Fabric-CA按照Fabric-CA安装测试Fabric-CA各项接口，理解Fabric-CA功能。 接口Fabric-CA提供了Swagger格式的json文档。通过对不同接口的测试，再结合源码的阅读提高对Fabric-CA的理解。 测试发现的问题 hf.Registrar.DelegateRoles属性不生效DelegateRoles属性按照官方文档和查阅的资料来看，意思是用来控制用户在注">
   
     <link rel="alternative" href="/atom.xml" title="DailyLearn" type="application/atom+xml">
   
@@ -148,130 +152,142 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-Fabric-CA-Learn" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      Fabric-CA Learn
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/09/20/Fabric-CA-Learn/" class="archive-article-date">
+
+        
+        <a href="/2018/09/20/Fabric-CA-Learn/" class="archive-article-date">
   	<time datetime="2018-09-20T02:55:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-20</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/09/20/Fabric-CA-Learn/">Fabric-CA Learn</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Fabric-CA"><a href="#Fabric-CA" class="headerlink" title="Fabric-CA"></a>Fabric-CA</h1><p>按照<a href="https://hyperledger-fabric-ca.readthedocs.io/en/latest/" target="_blank" rel="noopener">Fabric-CA</a>安装测试Fabric-CA各项接口，理解Fabric-CA功能。</p>
+<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><p>Fabric-CA提供了Swagger格式的json<a href="https://raw.githubusercontent.com/hyperledger/fabric-ca/master/swagger/swagger-fabric-ca.json" target="_blank" rel="noopener">文档</a>。通过对不同接口的测试，再结合<a href="https://github.com/hyperledger/fabric-ca" target="_blank" rel="noopener">源码</a>的阅读提高对Fabric-CA的理解。</p>
+<h2 id="测试发现的问题"><a href="#测试发现的问题" class="headerlink" title="测试发现的问题"></a>测试发现的问题</h2><ul>
+<li>hf.Registrar.DelegateRoles属性不生效<br>DelegateRoles属性按照官方文档和查阅的资料来看，意思是用来控制用户在注册新用户的hf.Registrar.Roles的范围的。即用户A的属性为{Roles=client，user，peer DelegateRoles=client，user Attributes=*}，则A在注册新用户B时，B的Roles属性范围只能小于等于{client，user}。但测试时此属性不生效。查看源码发现对DelegateRoles属性的检测逻辑只检测是否小于等于Roles属性。<ul>
+<li>Affiliation修改，会同样修改相关用户hf.Affiliation属性。但是属性修改后会使hf.Affiliation的cert属性变为false。源码阅读发现在修改属性时，未修改ecert，导致ecert使用默认值false。</li>
+</ul>
+</li>
+</ul>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/09/20/Fabric-CA-Learn/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/09/09/fabric架构/" class="archive-article-date">
-  	<time datetime="2018-09-09T12:40:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-09</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2018/09/09/fabric架构/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">fabric架构</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/09/09/fabric架构/">fabric架构</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/09/08/Fabric-code-read/" class="archive-article-date">
-  	<time datetime="2018-09-08T08:37:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/09/08/Fabric-code-read/">Fabric code read</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/09/06/hexo-mark/" class="archive-article-date">
-  	<time datetime="2018-09-06T07:59:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/09/06/hexo-mark/">hexo mark</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -294,8 +310,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
